@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/10/30 20:52:48 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:45:44 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_strlen(char *s)
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	if (!s)
@@ -61,7 +61,33 @@ char	*ft_strchr(const char *s, int c)
 		if (s[i] == (unsigned char)c)
 			return ((char *)&s[i]);
 	}
-	if ((unsigned char)c = '\0')
+	if ((unsigned char)c == '\0')
 		return ((char *)&s[i]);
 	return (NULL);
+}
+
+char	ft_strjoin(char *line, char *buffer)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	if (!line || !buffer)
+		return (NULL);
+	str = malloc(ft_strlen(line) + ft_strlen(buffer) + 1 * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (line[i])
+	{
+		str[i] = line[i];
+		i++;
+	}
+	while (buffer[j])
+	{
+		str[i + j] = buffer[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str[i + j]);
 }
