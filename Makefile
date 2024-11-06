@@ -6,13 +6,13 @@
 #    By: jocalder <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 19:34:02 by jocalder          #+#    #+#              #
-#    Updated: 2024/10/29 19:34:14 by jocalder         ###   ########.fr        #
+#    Updated: 2024/11/06 21:57:59 by jocalder         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftgnl.a
 
-SRCS	= ft_get_next_line.c \
+SRCS	= get_next_line.c get_next_line_utils.c 
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -22,13 +22,12 @@ FLAGS	= -Wall -Werror -Wextra
 
 all: $(NAME)
 
-%.c: %.c
+%.o: %.c
 	cc $(FLAGS) -c $< -o $@ -I ./
 
-$(NAME):
-	cc $(FLAGS) -c $(SRCS) -I ./
-	ar rc(NAME) $(OBJS)
-
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 clean:
 	rm -f $(OBJS)
 
@@ -37,4 +36,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY all clean fclean re
+
+.PHONY: all clean fclean re

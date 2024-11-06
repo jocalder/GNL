@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:33:23 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/05 20:49:38 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:29:17 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ char	*read_line(char *line, int fd)
 		buffer[bytes] = '\0';
 		line = ft_strjoin(line, buffer);
 	}
-	free(line);
-	return (line)
+	return (line);
 
 }
 
@@ -50,18 +49,13 @@ char	*new_line(char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
-	if (!line)
-	{
-		free(line);
-		return (NULL);
-	}
-	str = (char *)malloc((ft_strlen(line)  + 1) * sizeof(char *));
+	str = (char *)malloc((ft_strlen(line)  + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	j = 0;
 	while (j < i)
 	{
-		str[j] = line[i]
+		str[j] = line[i];
 		i++;
 		j++;
 	}
@@ -78,10 +72,9 @@ char	*update_buffer(char *line)
 		return (NULL);
 	while (line[i] && line[i] != '\n')
 		i++;
-	str = malloc(sizeof(char) * (line - i) + 1);
+	str = malloc(sizeof(char) * (ft_strlen(line) - i) + 1);
 	if (!str)
-	{
-		free(str);
+	{		free(str);
 		return (NULL);
 	}
 	while (line[i])
@@ -92,17 +85,20 @@ char	*update_buffer(char *line)
 	while (str[i] == '\n')
 		i++;
 	str[i] = '\0';
-	return (str)
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffersize;
-	char	*line;
-
-	buffersize = get_line(line, fd);
-	line = new_line(line);
+	static char	*line;
+	char	*next_line;
+	
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	line = read_line(line, fd);
+	next_line = new_line(line);
 	line = update_buffer(line);
-	free(line)
-	return (line);
+	return (next_line);
 }
+
+

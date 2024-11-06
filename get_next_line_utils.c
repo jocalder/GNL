@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/05 18:45:44 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:23:41 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strlen(char *s)
 
 	i = 0;
 	if (!s)
-		return (NULL);
+		return (0);
 	while (s[i])
 	{
 		i++;
@@ -26,47 +26,23 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	int		i;
-	char	*str;
-
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		len = 0;
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < len && s[start])
-	{
-		str[i] = s[start];
-		i++;
-		start++;
-	}
-	str[i] = '\0';
-	return (str[i]);
-}
-
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *line, int c)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (line[i])
 	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)&s[i]);
+		if (line[i] == (unsigned char)c)
+			return ((char *)&line[i]);
+		i++;
 	}
 	if ((unsigned char)c == '\0')
-		return ((char *)&s[i]);
+		return ((char *)&line[i]);
 	return (NULL);
 }
 
-char	ft_strjoin(char *line, char *buffer)
+char	*ft_strjoin(char *line, char *buffer)
 {
 	char	*str;
 	int		i;
@@ -83,11 +59,12 @@ char	ft_strjoin(char *line, char *buffer)
 		str[i] = line[i];
 		i++;
 	}
+	j = 0;
 	while (buffer[j])
 	{
 		str[i + j] = buffer[j];
 		j++;
 	}
 	str[i + j] = '\0';
-	return (str[i + j]);
+	return (str);
 }
