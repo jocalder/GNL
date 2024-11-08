@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:33:23 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/06 19:29:17 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:26:52 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*update_buffer(char *line)
 	{		free(str);
 		return (NULL);
 	}
+	i++;
 	while (line[i])
 	{
 		str[i] = line[i];
@@ -85,6 +86,7 @@ char	*update_buffer(char *line)
 	while (str[i] == '\n')
 		i++;
 	str[i] = '\0';
+	free(line);
 	return (str);
 }
 
@@ -100,5 +102,21 @@ char	*get_next_line(int fd)
 	line = update_buffer(line);
 	return (next_line);
 }
+/*
+int main()
+{
+	int fd;
+	char *line;
 
-
+	fd = open("quijote.txt", O_RDONLY);
+	if (fd == -1)
+		return (1);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
+	return (0);
+}
+*/

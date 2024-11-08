@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:32:10 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/06 18:40:11 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:50:01 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 char	*get_next_line(int fd);
 char	*read_line(char *line, int fd);
