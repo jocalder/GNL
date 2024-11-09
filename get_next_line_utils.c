@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/06 18:23:41 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:09:04 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strjoin(char *line, char *buffer)
 
 	if (!line || !buffer)
 		return (NULL);
-	str = malloc(ft_strlen(line) + ft_strlen(buffer) + 1 * sizeof(char));
+	str = malloc(ft_strlen(line) + ft_strlen(buffer) + 1);
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -66,5 +66,6 @@ char	*ft_strjoin(char *line, char *buffer)
 		j++;
 	}
 	str[i + j] = '\0';
+	free(line);
 	return (str);
 }
