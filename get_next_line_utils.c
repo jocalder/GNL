@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/08 19:09:04 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/11 19:31:00 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*ft_strchr(const char *line, int c)
 	int	i;
 
 	i = 0;
+	if (!line)
+		return (NULL);
 	while (line[i])
 	{
 		if (line[i] == (unsigned char)c)
