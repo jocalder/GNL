@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/12 18:47:18 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:55:01 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*ft_strjoin(char *line, char *buffer)
 		j++;
 	}
 	str[i + j] = '\0';
+	free(line);
 	return (str);
 }
 
