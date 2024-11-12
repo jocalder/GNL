@@ -6,7 +6,7 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:33:23 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/08 19:09:13 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:33:53 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,24 @@ char	*read_line(char *line, int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 	{
-		free(buffer);
+		printf("Error: No se asigno buffer\n");
 		return (NULL);
 	}
+	printf("buffer asignado correctamente\n");
 	bytes = 1;
-	while (!ft_strchr(line, '\n') && fd > 0)
+	while (!ft_strchr(line, '\n') && bytes > 0)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
+		{
+			printf("error en la lectura\n");
+			free(buffer);
 			return (NULL);
+		}
+		printf("bytes leidos: %ld\n", bytes);
 		buffer[bytes] = '\0';
 		line = ft_strjoin(line, buffer);
 	}
@@ -50,7 +56,8 @@ char	*new_line(char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
-	str = (char *)malloc((ft_strlen(line) + 1) * sizeof(char));
+	printf("Hasta el salto de línea: %s\n", line);
+	str = (char *)malloc((ft_strlen(line) + 2) * sizeof(char));
 	if (!str)
 		return (NULL);
 	j = 0;
@@ -123,7 +130,7 @@ int main()
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s", line);
+		printf("%s\n", line);
 		free(line);
 	}
 	close(fd);

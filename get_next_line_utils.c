@@ -6,13 +6,13 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/11 19:31:00 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:23:45 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+int	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -70,4 +70,23 @@ char	*ft_strjoin(char *line, char *buffer)
 	str[i + j] = '\0';
 	free(line);
 	return (str);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	char	*dup;
+
+	ptr = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!ptr)
+		return (NULL);
+	dup = ptr;
+	while (*s)
+	{
+		*dup = *s;
+		dup++;
+		s++;
+	}
+	*dup = '\0';
+	return (ptr);
 }
