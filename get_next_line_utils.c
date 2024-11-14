@@ -6,13 +6,13 @@
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 19:30:43 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/12 18:55:01 by jocalder         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:08:04 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *line, int c)
+char	*ft_strchr(char *line, int c)
 {
 	int	i;
 
@@ -50,11 +50,11 @@ char	*ft_strjoin(char *line, char *buffer)
 	int		i;
 	int		j;
 
-	if (!line || !buffer)
+	if (!buffer)
 		return (NULL);
-	str = malloc(ft_strlen(line) + ft_strlen(buffer) + 1);
+	str = malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(buffer) + 1));
 	if (!str)
-		return (NULL);
+		return (free(line), NULL);
 	i = 0;
 	while (line[i])
 	{
@@ -68,25 +68,5 @@ char	*ft_strjoin(char *line, char *buffer)
 		j++;
 	}
 	str[i + j] = '\0';
-	free(line);
-	return (str);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*ptr;
-	char	*dup;
-
-	ptr = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!ptr)
-		return (NULL);
-	dup = ptr;
-	while (*s)
-	{
-		*dup = *s;
-		dup++;
-		s++;
-	}
-	*dup = '\0';
-	return (ptr);
+	return (free(line), str);
 }
