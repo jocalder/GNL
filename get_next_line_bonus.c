@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocalder <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 19:33:23 by jocalder          #+#    #+#             */
-/*   Updated: 2024/11/18 20:03:07 by jocalder         ###   ########.fr       */
+/*   Created: 2024/11/18 17:03:20 by jocalder          #+#    #+#             */
+/*   Updated: 2024/11/18 20:00:15 by jocalder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_line(char *line, int fd)
 {
@@ -90,22 +90,24 @@ char	*update_buffer(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	static char	*line[MAX_FD];
 	char		*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (!fd)
 		return (NULL);
-	if (!line)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
+		return (NULL);
+	if (!line[fd])
 	{
-		line = (char *)malloc(1);
-		if (!line)
+		line[fd] = (char *)malloc(1);
+		if (!line[fd])
 			return (NULL);
-		line[0] = '\0';
+		line[fd][0] = '\0';
 	}
-	line = read_line(line, fd);
-	if (!line)
+	line[fd] = read_line(line[fd], fd);
+	if (!line[fd])
 		return (NULL);
-	next_line = new_line(line);
-	line = update_buffer(line);
+	next_line = new_line(line[fd]);
+	line[fd] = update_buffer(line[fd]);
 	return (next_line);
 }
